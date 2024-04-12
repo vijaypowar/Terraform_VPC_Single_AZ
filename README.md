@@ -26,6 +26,11 @@ aws --version
 ```
 * On Windows machine grafhically awscli latest version can be installed.
 #### 6] Install Terraform
+* On Ubuntu machine
+
+* On Mac machine
+
+* On Windows machine
 
 #### 7] Configure the credentials files
 Go to the location C:\Users\terraform\.aws\credentials & Add the AWS Access key ID and Secret key in this file.
