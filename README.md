@@ -39,4 +39,6 @@ aws_access_key_id = AKTF1234ABCDEFGHIKJ
 aws_secret_access_key = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 #### 8. Add SSH Public key on GitHub account.
+#### 9. Create Repository on GitHub
+While creating repository on github add LICENSE, .gitignore and README.md file. Checkout this on local machine.
 ### Steps :-
