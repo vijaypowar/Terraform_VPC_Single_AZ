@@ -57,6 +57,8 @@ resource "aws_nat_gateway" "eb_vpc1_nat_gw" {
 
     tags = {
     Name = "eb-vpc1-nat-gw"
+    
+    depends_on = [aws_internet_gateway.eb_vpc1_igw]
     }
 
 # Public rt-1

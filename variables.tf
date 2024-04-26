@@ -25,3 +25,26 @@ variable "cidr_block" {
   description = "VPC IP range"
   type        = string
 }
+
+# Variables for EC2 instance
+
+variable "instance_type" {
+  type = string
+}
+
+variable "my_ip" {
+  type = string
+}
+
+variable "ami_id" {
+  description = "instance_type"
+  type        = string
+  default     = ""
+}
+
+variable "ebs_size" {
+  description = "ebs_size"
+  type        = string
+  default     = "8"
+}
+
