@@ -1,8 +1,8 @@
 # Creates the security group for the EC2-Nginx server.
-resource "aws_security_group" "lab03-secgroup-1" {
-  name        = "lab03-secgroup-1"
+resource "aws_security_group" "rp_sg1" {
+  name        = "rp-sg1"
   description = "Allow web server network traffic"
-  vpc_id      = aws_vpc.lab03-vpc.id
+  vpc_id      = aws_vpc.eb_vpc1.id
 
   ingress {
     description = "SSH from my IP"
@@ -28,7 +28,7 @@ resource "aws_security_group" "lab03-secgroup-1" {
   }
 
   tags = {
-    Name = "lab03-secgroup-1"
+    Name = "rp-sg1"
   }
 }
 

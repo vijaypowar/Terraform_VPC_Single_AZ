@@ -14,9 +14,9 @@
 # 1 NAT Gateway >> Created in public subnet and associated with private route table
 #-----------------------------------------------------------------------------------
 # Naming conventions //Suppose client Name is Emprise Bank
-# eb-vpc, eb-subnet1-public, eb-subnet1-private, eb-igw, eb-nat, eb-pub-rt, eb-priv-rt  //network.tf
-# reverse-proxy, eb-sg-rp  //reverse-proxy.tf
-# web-server, eb-sg-web  //web-server.tf
+# eb-vpc1, eb-vpc1-public-subnet1, eb-vpc1-private-subnet1, eb-vpc1-igw, eb-vpc1-nat, eb-vpc1-pub-rt1, eb-priv-rt1  //network.tf
+# reverse-proxy1, rp1-sg1  //reverse-proxy.tf
+# web-server1, web1-sg1  //web-server.tf
 # Declaration of variables  // variables.tf
 # Variables   //terraform.tfvars
 # 
