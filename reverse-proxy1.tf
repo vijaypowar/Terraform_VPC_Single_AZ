@@ -1,6 +1,6 @@
 # Creates the security group for the EC2-Nginx server.
 resource "aws_security_group" "rp_sg1" {
-  name        = "rp-sg1"
+  name        = "rp1-sg1"
   description = "Allow web server network traffic"
   vpc_id      = aws_vpc.eb_vpc1.id
 
@@ -20,6 +20,14 @@ resource "aws_security_group" "rp_sg1" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+ingress {
+    description = "HTTP from anywhere"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -28,14 +36,14 @@ resource "aws_security_group" "rp_sg1" {
   }
 
   tags = {
-    Name = "rp-sg1"
+    Name = "rp1-sg1"
   }
 }
 
 
 # Imports the keypair
-resource "aws_key_pair" "rp_ec2_key" {
-  key_name   = "rp-ec2-key"
+resource "aws_key_pair" "rp1_ec2_key" {
+  key_name   = "rp1-ec2-key"
   public_key = file("~/.ssh/id_rsa.pub")
 }
 
@@ -43,9 +51,9 @@ resource "aws_key_pair" "rp_ec2_key" {
 resource "aws_instance" "reverse_proxy1" {
   instance_type               = var.instance_type
   ami                         = var.ami_id
-  key_name                    = aws_key_pair.rp_ec2_key.id
-  vpc_security_group_ids      = [aws_security_group.rp_sg_1.id]
-  subnet_id                   = aws_subnet.aws_subnet.eb_vpc1_public_subnet1.id.id
+  key_name                    = aws_key_pair.rp1_ec2_key.id
+  vpc_security_group_ids      = [aws_security_group.rp1_sg1.id]
+  subnet_id                   = aws_subnet.eb_vpc1_public_subnet1.id
   associate_public_ip_address = true
   user_data                   = file("reverse-proxy1.tpl")
 
