@@ -41,4 +41,22 @@ aws_secret_access_key = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 #### 8. Add SSH Public key on GitHub account.
 #### 9. Create Repository on GitHub
 While creating repository on github add LICENSE, .gitignore and README.md file. Checkout this on local machine.
-### Steps :-
+#### 10. This terraform template deploys the following resources on AWS. 
+* 1 VPC >> 10.10.0.0/16
+* 1 Public Subnet >> az > 1a >> 10.10.1.0/24
+* 1 Private Subnet >> az > 1a >> 10.10.51.0/24 
+* 1 Public Route table / Route table association
+* 1 Private route table  / Route table association
+* 1 reverse proxy server in public subnet
+* 1 Security Group for reverse proxy
+* 1 Web server in private instance
+* 1 Security Group fro web server
+* 1 Internet Gateway >> IGW mapped with VPC
+* 1 NAT Gateway >> Created in public subnet and associated with private route table
+---
+* Naming conventions //Suppose client Name is Emprise Bank
+* eb-vpc1, eb-vpc1-public-subnet1, eb-vpc1-private-subnet1, eb-vpc1-igw, eb-vpc1-nat, eb-vpc1-pub-rt1, eb-priv-rt1  //network.tf
+* reverse-proxy1, rp1-sg1  //reverse-proxy.tf
+* web-server1, web1-sg1  //web-server.tf
+* Declaration of variables  // variables.tf
+* Variables   //terraform.tfvars
