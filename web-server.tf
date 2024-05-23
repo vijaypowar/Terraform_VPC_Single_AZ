@@ -1,9 +1,9 @@
 # Create Security group for Web Server in private subnet
 
-resource "aws_security_group" "ws1_sg1" {
-  name        = "ws1-sg1"
+resource "aws_security_group" "sg_ws" {
+  name        = "sg-ws"
   description = "Allow web server network traffic"
-  vpc_id      = aws_vpc.eb_vpc1.id
+  vpc_id      = aws_vpc.eb_vpc.id
 
   ingress {
     description = "SSH from my IP" // It should be limited to your own IP or IP of public subnet
@@ -22,7 +22,6 @@ resource "aws_security_group" "ws1_sg1" {
 
   }
 
-
   egress {
     from_port   = 0
     to_port     = 0
@@ -31,31 +30,31 @@ resource "aws_security_group" "ws1_sg1" {
   }
 
   tags = {
-    Name = "ws1-sg1"
+    Name = "sg-ws"
   }
 }
 
 # Imports the keypair
-resource "aws_key_pair" "ws1_ec2_key" {
-  key_name   = "ws1-ec2-key"
+resource "aws_key_pair" "ws_ec2_key" {
+  key_name   = "ws-ec2-key"
   public_key = file("~/.ssh/id_rsa.pub")
 }
 
 # Creates the EC2 instance with Apache installed in Private subnet
-resource "aws_instance" "reverse_proxy1" {
+resource "aws_instance" "web_servers" {
   instance_type               = var.instance_type
   ami                         = var.ami_id
-  key_name                    = aws_key_pair.ws1_ec2_key.id
-  vpc_security_group_ids      = [aws_security_group.ws1_sg1.id]
-  subnet_id                   = aws_subnet.eb_vpc1_private_subnet1.id
+  key_name                    = aws_key_pair.ws_ec2_key.id
+  vpc_security_group_ids      = [aws_security_group.sg_ws.id]
+  subnet_id                   = aws_subnet.eb_private_subnet1.id
   #associate_public_ip_address = true
-  user_data                   = file("web-server1.tpl")
+  user_data                   = file("web-server.tpl")
 
   root_block_device {
     volume_size = var.ebs_size
   }
 
   tags = {
-    Name = "reverse-proxy1"
+    Name = "web-server"
   }
 }
